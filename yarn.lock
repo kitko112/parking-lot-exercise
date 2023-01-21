@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@tsconfig/node18@^1.0.1":
+"@tsconfig/node18-strictest-esm@^1.0.1":
   version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@tsconfig/node18/-/node18-1.0.1.tgz#ea5b375a9ead6b09ccbd70c3894ea069829ea1bb"
-  integrity sha512-sNFeK6X2ATlhlvzyH4kKYQlfHXE2f2/wxtB9ClvYXevWpmwkUT7VaSrjIN9E76Qebz8qP5JOJJ9jD3QoD/Z9TA==
+  resolved "https://registry.yarnpkg.com/@tsconfig/node18-strictest-esm/-/node18-strictest-esm-1.0.1.tgz#07179c12c3cf1b9764f7b580b3a2df3784cf47be"
+  integrity sha512-cHzmAqw7CMbyqROWeBgVhard3F2V6zxOSJnQ4E6SJWruXD5ypuP9/QKekwBdfXQ4oUTaizIICKIwb+v3v33t0w==
 
 "@types/node@^18.11.18":
   version "18.11.18"
