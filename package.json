@@ -1,0 +1,16 @@
+{
+  "name": "parking-lot-exercise",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Kit Ko",
+  "license": "MIT",
+  "devDependencies": {
+    "@tsconfig/node18": "^1.0.1",
+    "@types/node": "^18.11.18",
+    "typescript": "^4.9.4"
+  },
+  "scripts": {
+    "build": "rm -rf dist && tsc",
+    "start": "yarn build && node dist/index.js"
+  }
+}
