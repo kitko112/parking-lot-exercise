@@ -32,6 +32,24 @@ describe('Parking Lot', () => {
             const parkingResult = parkingLot.park('motorcycle');
             
             expect(parkingResult).toEqual({ticket: newParkingTicket, message: 'Parking successful'});
+        });
+
+        it('should return result of "No space available" when there is no available spot for a motorcycle', () => {
+            const mockSpotAllocationService: ISpotAllocationService = {
+                getSpot: jest.fn().mockReturnValue(undefined),
+                allocateSpot: jest.fn()
+            };
+
+            const mockTicketService: ITicketService = {
+                createTicket: jest.fn()
+            };
+
+            const parkingLot = new ParkingLot(mockSpotAllocationService, mockTicketService);
+            const parkingResult = parkingLot.park('motorcycle');
+            
+            expect(mockSpotAllocationService.allocateSpot).not.toHaveBeenCalled();
+            expect(mockTicketService.createTicket).not.toHaveBeenCalled();
+            expect(parkingResult).toEqual({ message: 'No space available'});
         })
     })
    
