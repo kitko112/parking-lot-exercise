@@ -1,7 +1,7 @@
 import type { ParkingSpot } from '../model/parkingSpot';
 import type { SpotSize } from '../type/spotSize';
 import type { ISpotAllocationService } from './ISpotAllocationService';
-import type { ISpotRepository } from './ISpotRepository';
+import type { ISpotRepository } from '../repository/ISpotRepository';
 
 export class SpotAllocationService implements ISpotAllocationService{
 
