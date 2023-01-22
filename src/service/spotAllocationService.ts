@@ -16,8 +16,13 @@ export class SpotAllocationService implements ISpotAllocationService{
             case 'small':{
                 return this._spotRepository.getAvailableSmallSpot();
             }
+            case 'medium':{
+                return this._spotRepository.getAvailableMediumSpot();
+            }
+            case 'large':{
+                return this._spotRepository.getAvailableLargeSpot();
+            }
         }
-        return;
     }
 
     public allocateSpot(parkingSpot: ParkingSpot): ParkingSpot {

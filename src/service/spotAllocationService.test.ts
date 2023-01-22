@@ -49,7 +49,7 @@ describe('Spot Allocation Service', () => {
             const mockSpotRepository: ISpotRepository = {
                 getAvailableSmallSpot: jest.fn(),
                 getAvailableMediumSpot: jest.fn(),
-                getAvailableLargeSpot: jest.fn().mockReturnValue(emptyMediumSpot),
+                getAvailableLargeSpot: jest.fn().mockReturnValue(emptyLargeSpot),
             };
 
             const spotAllocationService = new SpotAllocationService(mockSpotRepository)
