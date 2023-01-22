@@ -15,6 +15,6 @@
   "scripts": {
     "build": "rm -rf dist && tsc",
     "start": "yarn build && node dist/index.js",
-    "test": "jest --no-cache"
+    "test": "jest --coverage"
   }
 }
