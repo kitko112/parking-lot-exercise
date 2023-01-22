@@ -1,5 +1,6 @@
 import type { ParkingSpot } from '../model/parkingSpot';
 import type { ISpotRepository } from './ISpotRepository';
+import { SpotAllocationService } from './spotAllocationService';
 
 describe('Spot Allocation Service', () => {
     describe('Get spot method test suite', () => {
