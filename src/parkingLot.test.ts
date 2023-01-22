@@ -1,5 +1,6 @@
 import type { ParkingSpot } from './model/parkingSpot'
 import type { ParkingTicket } from './model/parkingTicket'
+import { ParkingLot } from './parkingLot'
 import type { ISpotAllocationService } from './service/ISpotAllocationService'
 import type { ITicketService } from './service/ITicketService'
 
@@ -17,7 +18,7 @@ describe('Parking Lot', () => {
             entryDateTime: dateTime
         };
         
-        it('should return parking ticket successfully when a small spot is available for a motocycle', () => {
+        it('should return parking ticket successfully when a small spot is available for a motorcycle', () => {
             const mockSpotAllocationService: ISpotAllocationService = {
                 getSpot: jest.fn().mockReturnValue(emptyParkingSpot),
                 allocateSpot: jest.fn().mockReturnValue({...emptyParkingSpot, isOccupied: true}),
@@ -28,8 +29,9 @@ describe('Parking Lot', () => {
             };
 
             const parkingLot = new ParkingLot(mockSpotAllocationService, mockTicketService);
-            const parkingTicket = parkingLot.park('motorcycle');
-            expect(parkingTicket).toEqual(newParkingTicket);
+            const parkingResult = parkingLot.park('motorcycle');
+            
+            expect(parkingResult).toEqual({ticket: newParkingTicket, message: 'Parking successful'});
         })
     })
    
