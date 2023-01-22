@@ -4,7 +4,7 @@ import type { ITicketService } from './service/ITicketService';
 import type { SpotSize } from './type/spotSize';
 import type { VehicleType } from './type/vehicleType';
 
-export class ParkingLot implements ParkingLot{
+export class ParkingLot implements ParkingLot {
 
     private _spotAllocationService: ISpotAllocationService;
     private _ticketService: ITicketService;
@@ -27,18 +27,21 @@ export class ParkingLot implements ParkingLot{
         this._ticketService = ticketService;
     }
 
-    public park(vehicleType: VehicleType): ParkingResult{
+    public park(vehicleType: VehicleType): ParkingResult {
         const spotSize = this._vehicleSpotSizeMap.get(vehicleType);
-        if(spotSize){
+        if (spotSize) {
             const availableSpot = this._spotAllocationService.getSpot(spotSize);
 
-            // TODO: handle spot unavailable
-            const assignedSpot = this._spotAllocationService.allocateSpot(availableSpot);
+            if (availableSpot) {
+                const assignedSpot = this._spotAllocationService.allocateSpot(availableSpot);
+                const ticket = this._ticketService.createTicket(assignedSpot.spotNumber, new Date());
+                return { ticket, message: 'Parking successful' }
+            } else {
+                return { message: 'No space available' }
+            }
 
-            const ticket = this._ticketService.createTicket(assignedSpot.spotNumber, new Date());
-            return {ticket, message: 'Parking successful'}
         }
-        
-        return {message: 'Unsupported vehicle type'}
+
+        return { message: 'Unsupported vehicle type' }
     }
 }
