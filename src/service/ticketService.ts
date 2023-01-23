@@ -20,4 +20,8 @@ export class TicketService implements ITicketService {
         const insertedTicket = this._ticketRepository.insertTicket(newTicket);
         return insertedTicket;
     }
+
+    public getTicket(ticketNumber: string): ParkingTicket {
+        return this._ticketRepository.getTicketById(ticketNumber);
+    }
 }
