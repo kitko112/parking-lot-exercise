@@ -18,7 +18,7 @@ export class SpotRepository implements ISpotRepository {
 
     private _smallSpots: ParkingSpot[];
     private _mediumSpots: ParkingSpot[];
-    private _largepots: ParkingSpot[];
+    private _largeSpots: ParkingSpot[];
 
     constructor(
         initSmallSpots: () => ParkingSpot[],
@@ -27,19 +27,24 @@ export class SpotRepository implements ISpotRepository {
     ) {
         this._smallSpots = initSmallSpots();
         this._mediumSpots = initMediumSpots();
-        this._largepots = initLargeSpots();
+        this._largeSpots = initLargeSpots();
     }
 
     public getAvailableLargeSpot(): ParkingSpot | undefined {
-        return this._largepots.find(s => !s.isOccupied);
+        return this.findEmptySpot(this._largeSpots);
     }
 
     public getAvailableMediumSpot(): ParkingSpot | undefined {
-        return this._mediumSpots.find(s => !s.isOccupied);
+        return this.findEmptySpot(this._mediumSpots);
     }
 
     public getAvailableSmallSpot(): ParkingSpot | undefined {
-        return this._smallSpots.find(s => !s.isOccupied);
+        return this.findEmptySpot(this._smallSpots);
+    }
+
+    private findEmptySpot(spots: ParkingSpot[]): ParkingSpot | undefined{
+        const spot = spots.find(s => !s.isOccupied);
+        return spot? {...spot}: undefined;
     }
 
     public updateSpot(parkSpot: ParkingSpot): ParkingSpot {
