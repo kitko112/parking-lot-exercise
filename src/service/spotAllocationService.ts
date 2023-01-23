@@ -26,7 +26,6 @@ export class SpotAllocationService implements ISpotAllocationService{
     }
 
     public allocateSpot(parkingSpot: ParkingSpot): ParkingSpot {
-        // TODO: handle allocate spot logic
-        return parkingSpot;
+        return this._spotRepository.updateSpot({...parkingSpot, isOccupied: true});
     }
 }
