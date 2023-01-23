@@ -2,8 +2,8 @@ import type { ParkingSpot } from '../model/parkingSpot';
 import type { ISpotRepository } from '../repository/ISpotRepository';
 import { SpotAllocationService } from './spotAllocationService';
 
-describe('Spot Allocation Service', () => {
-    describe('Get spot method test suite', () => {
+describe('Spot Allocation Service test suite', () => {
+    describe('Get spot method', () => {
         const emptySmallSpot: ParkingSpot = {
             spotNumber: 1,
             isOccupied: false,
@@ -49,7 +49,7 @@ describe('Spot Allocation Service', () => {
         });
     });
 
-    describe('Allocate spot method test suite', () => {
+    describe('Allocate spot method', () => {
         const emptySmallSpot: ParkingSpot = {
             spotNumber: 1,
             isOccupied: false,

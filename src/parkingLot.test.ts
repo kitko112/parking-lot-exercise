@@ -6,8 +6,8 @@ import type { ITicketService } from './service/ITicketService'
 import type { SpotSize } from './type/spotSize'
 import type { VehicleType } from './type/vehicleType'
 
-describe('Parking Lot', () => {
-    describe('Park method test suite', () => {
+describe('Parking Lot test suite', () => {
+    describe('Park method', () => {
         const dateTime = new Date();
         const emptyParkingSpot: ParkingSpot = {
             spotNumber: 1,
