@@ -17,21 +17,25 @@ export const buildSpotFn = (
 export class SpotRepository implements ISpotRepository {
 
     private _smallSpots: ParkingSpot[];
+    private _mediumSpots: ParkingSpot[];
+    private _largepots: ParkingSpot[];
 
     constructor(
-        initSmallSpots: () => ParkingSpot[]
+        initSmallSpots: () => ParkingSpot[],
+        initMediumSpots: () => ParkingSpot[],
+        initLargeSpots: () => ParkingSpot[]
     ) {
         this._smallSpots = initSmallSpots();
+        this._mediumSpots = initMediumSpots();
+        this._largepots = initLargeSpots();
     }
 
     public getAvailableLargeSpot(): ParkingSpot | undefined {
-        // TODO: implement as getAvailableLargeSpot
-        return;
+        return this._largepots.find(s => !s.isOccupied);
     }
 
     public getAvailableMediumSpot(): ParkingSpot | undefined {
-        // TODO: implement as getAvailableLargeSpot
-        return;
+        return this._mediumSpots.find(s => !s.isOccupied);
     }
 
     public getAvailableSmallSpot(): ParkingSpot | undefined {
