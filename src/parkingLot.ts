@@ -9,22 +9,16 @@ export class ParkingLot implements ParkingLot {
     private _spotAllocationService: ISpotAllocationService;
     private _ticketService: ITicketService;
 
-    // TODO: inject from constructor for different parking lot
-    private _vehicleSpotSizeMap = new Map<VehicleType, SpotSize>([
-        ['motorcycle', 'small'],
-        ['scooter', 'small'],
-        ['car', 'medium'],
-        ['suv', 'medium'],
-        ['bus', 'large'],
-        ['truck', 'large'],
-    ]);
+    private _vehicleSpotSizeMap: Map<VehicleType, SpotSize>;
 
     constructor(
         spotAllocationService: ISpotAllocationService,
-        ticketService: ITicketService
+        ticketService: ITicketService,
+        vehichleSpotMap: Map<VehicleType, SpotSize>
     ) {
         this._spotAllocationService = spotAllocationService;
         this._ticketService = ticketService;
+        this._vehicleSpotSizeMap = vehichleSpotMap;
     }
 
     public park(vehicleType: VehicleType): ParkingResult {
