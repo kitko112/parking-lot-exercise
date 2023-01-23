@@ -1,5 +1,5 @@
 export interface ParkingTicket {
-    ticketNumber: string;
+    ticketNumber?: string;
     spotNumber: number;
     entryDateTime: Date;
 }
