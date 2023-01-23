@@ -28,7 +28,7 @@ export class ParkingLot implements ParkingLot {
 
             if (availableSpot) {
                 const assignedSpot = this._spotAllocationService.allocateSpot(availableSpot);
-                const ticket = this._ticketService.createTicket(assignedSpot.spotNumber, new Date());
+                const ticket = this._ticketService.createTicket(assignedSpot.spotNumber);
                 return { ticket, message: 'Parking successful' }
             } else {
                 return { message: 'No space available' }
