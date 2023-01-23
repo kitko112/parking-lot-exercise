@@ -4,5 +4,7 @@ export interface ISpotRepository {
     getAvailableSmallSpot(): ParkingSpot | undefined;
     getAvailableMediumSpot(): ParkingSpot | undefined;
     getAvailableLargeSpot(): ParkingSpot | undefined;
-    updateSpot(parkSpot: ParkingSpot): ParkingSpot;
+    updateSmallSpot(parkSpot: ParkingSpot): ParkingSpot;
+    updateMediumSpot(parkSpot: ParkingSpot): ParkingSpot;
+    updateLargeSpot(parkSpot: ParkingSpot): ParkingSpot;
 }

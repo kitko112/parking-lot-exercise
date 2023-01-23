@@ -26,6 +26,18 @@ export class SpotAllocationService implements ISpotAllocationService{
     }
 
     public allocateSpot(parkingSpot: ParkingSpot): ParkingSpot {
-        return this._spotRepository.updateSpot({...parkingSpot, isOccupied: true});
+        const updateSpot = {...parkingSpot, isOccupied: true}
+        switch (parkingSpot.spotSize){
+            case 'small':{
+                return this._spotRepository.updateSmallSpot(updateSpot);
+            }
+            case 'medium':{
+                return this._spotRepository.updateMediumSpot(updateSpot);
+            }
+            case 'large':{
+                return this._spotRepository.updateLargeSpot(updateSpot);
+            }
+        }
+        
     }
 }
