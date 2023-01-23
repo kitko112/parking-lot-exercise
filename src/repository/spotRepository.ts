@@ -47,37 +47,26 @@ export class SpotRepository implements ISpotRepository {
         return spot? {...spot}: undefined;
     }
 
-    private getSpotById(spots: ParkingSpot[], spotNumber: number): ParkingSpot | undefined{
-        return spots.find(s => s.spotNumber === spotNumber);
+    public updateSmallSpot(parkingSpot: ParkingSpot): ParkingSpot {
+        return this.updateSpot(this._smallSpots, parkingSpot);
     }
 
-    public updateSmallSpot({spotNumber, isOccupied}: ParkingSpot): ParkingSpot {
-        const spot = this.getSpotById(this._smallSpots, spotNumber)
+    public updateMediumSpot(parkingSpot: ParkingSpot): ParkingSpot {
+        return this.updateSpot(this._mediumSpots, parkingSpot);
+    }
+
+    public updateLargeSpot(parkingSpot: ParkingSpot): ParkingSpot {
+        return this.updateSpot(this._largeSpots, parkingSpot);
+    }
+
+    private updateSpot(spots: ParkingSpot[], {spotNumber, spotSize, isOccupied}: ParkingSpot): ParkingSpot{
+        const spot =  spots.find(s => s.spotNumber === spotNumber);
         if(spot){
             spot.isOccupied = isOccupied;
             return spot;
         } else {
-            throw new Error(`Unable to update non existent small spot: ${spotNumber}`);
+            throw new Error(`Unable to update non existent ${spotSize} spot: ${spotNumber}`);
         }
     }
 
-    public updateMediumSpot({spotNumber, isOccupied}: ParkingSpot): ParkingSpot {
-        const spot = this.getSpotById(this._mediumSpots, spotNumber)
-        if(spot){
-            spot.isOccupied = isOccupied;
-            return spot;
-        } else {
-            throw new Error(`Unable to update non existent medium spot: ${spotNumber}`);
-        }
-    }
-    
-    public updateLargeSpot({spotNumber, isOccupied}: ParkingSpot): ParkingSpot {
-        const spot = this.getSpotById(this._largeSpots, spotNumber)
-        if(spot){
-            spot.isOccupied = isOccupied;
-            return spot;
-        } else {
-            throw new Error(`Unable to update non existent large spot: ${spotNumber}`);
-        }
-    }
 }
