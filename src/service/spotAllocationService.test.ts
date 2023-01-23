@@ -19,13 +19,14 @@ describe('Spot Allocation Service', () => {
             isOccupied: false,
             spotSize: 'large'
         };
-        it('should return a available small spot', () => {
-            const mockSpotRepository: ISpotRepository = {
-                getAvailableSmallSpot: jest.fn().mockReturnValue(emptySmallSpot),
-                getAvailableMediumSpot: jest.fn(),
-                getAvailableLargeSpot: jest.fn(),
-            };
 
+        const mockSpotRepository: ISpotRepository = {
+            getAvailableSmallSpot: jest.fn().mockReturnValue(emptySmallSpot),
+            getAvailableMediumSpot: jest.fn().mockReturnValue(emptyMediumSpot),
+            getAvailableLargeSpot: jest.fn().mockReturnValue(emptyLargeSpot),
+        };
+
+        it('should return a available small spot', () => {
             const spotAllocationService = new SpotAllocationService(mockSpotRepository)
             const smallSpot = spotAllocationService.getSpot('small');
 
@@ -33,12 +34,6 @@ describe('Spot Allocation Service', () => {
         });
 
         it('should return a available medium spot', () => {
-            const mockSpotRepository: ISpotRepository = {
-                getAvailableSmallSpot: jest.fn(),
-                getAvailableMediumSpot: jest.fn().mockReturnValue(emptyMediumSpot),
-                getAvailableLargeSpot: jest.fn(),
-            };
-
             const spotAllocationService = new SpotAllocationService(mockSpotRepository)
             const mediumSpot = spotAllocationService.getSpot('medium');
 
@@ -46,16 +41,10 @@ describe('Spot Allocation Service', () => {
         });
 
         it('should return a available large spot', () => {
-            const mockSpotRepository: ISpotRepository = {
-                getAvailableSmallSpot: jest.fn(),
-                getAvailableMediumSpot: jest.fn(),
-                getAvailableLargeSpot: jest.fn().mockReturnValue(emptyLargeSpot),
-            };
-
             const spotAllocationService = new SpotAllocationService(mockSpotRepository)
             const largeSpot = spotAllocationService.getSpot('large');
 
             expect(largeSpot).toEqual(emptyLargeSpot);
         });
-    })
+    });
 })
