@@ -1,10 +1,11 @@
+import type { IParkingLot } from './IParkingLot';
 import type { ParkingResult } from './model/parkingResult';
 import type { ISpotAllocationService } from './service/ISpotAllocationService';
 import type { ITicketService } from './service/ITicketService';
 import type { SpotSize } from './type/spotSize';
 import type { VehicleType } from './type/vehicleType';
 
-export class ParkingLot implements ParkingLot {
+export class ParkingLot implements IParkingLot {
 
     private _spotAllocationService: ISpotAllocationService;
     private _ticketService: ITicketService;
