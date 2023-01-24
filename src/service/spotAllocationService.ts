@@ -25,6 +25,10 @@ export class SpotAllocationService implements ISpotAllocationService{
         }
     }
 
+    public getOccupiedSpot(spotNumber: number): ParkingSpot | undefined {
+        return this._spotRepository.getOccupiedSpotById(spotNumber);
+    }
+
     public allocateSpot(parkingSpot: ParkingSpot): ParkingSpot {
         const updateSpot = {...parkingSpot, isOccupied: true}
         switch (parkingSpot.spotSize){
