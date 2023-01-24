@@ -17,4 +17,8 @@ export class TicketRepository implements ITicketRepository {
         this._ticketMap.set(ticketNumber, insertedTicket);
         return insertedTicket;
     }
+
+    public getTicketById(ticketNumber: string): ParkingTicket | undefined {
+        return this._ticketMap.get(ticketNumber);
+    }
 }

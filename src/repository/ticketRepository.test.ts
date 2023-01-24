@@ -22,5 +22,27 @@ describe('Ticket Repositry test suite', () => {
 
             expect(insertedTicketTwo).toEqual({...newTicketTwo, ticketNumber: '002'});
         })
-    })
+    });
+
+    describe('Get ticket by id method', () => {
+        it('should return ticket of the givin number', () => {
+            const newTicket = {spotNumber: 1, entryDateTime: new Date()}
+            
+            const repository = new TicketRepository();
+            repository.insertTicket(newTicket);
+            const ticket = repository.getTicketById('001');
+
+            expect(ticket).toEqual({...newTicket, ticketNumber: '001'});
+        });
+
+        it('should return undefined when no matched ticket', () => {
+            const newTicket = {spotNumber: 1, entryDateTime: new Date()}
+            
+            const repository = new TicketRepository();
+            repository.insertTicket(newTicket);
+            const ticket = repository.getTicketById('002');
+
+            expect(ticket).toBeUndefined();
+        });
+    });
 })
