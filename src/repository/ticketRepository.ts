@@ -18,6 +18,15 @@ export class TicketRepository implements ITicketRepository {
         return insertedTicket;
     }
 
+    public updateTicket(ticketNumber: string, exitDateTime: Date): ParkingTicket {
+        const ticket = this._ticketMap.get(ticketNumber);
+        if(ticket){
+            ticket.exitDateTime = exitDateTime;
+            return { ...ticket };
+        }
+        throw new Error(`Unable to update non existent ticket ${ticketNumber}`)
+    }
+
     public getTicketById(ticketNumber: string): ParkingTicket | undefined {
         return this._ticketMap.get(ticketNumber);
     }
