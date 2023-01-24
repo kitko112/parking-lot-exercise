@@ -21,7 +21,7 @@ export class TicketService implements ITicketService {
         return insertedTicket;
     }
 
-    public getTicket(ticketNumber: string): ParkingTicket {
+    public getTicket(ticketNumber: string): ParkingTicket | undefined{
         return this._ticketRepository.getTicketById(ticketNumber);
     }
 }
