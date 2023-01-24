@@ -1,5 +1,5 @@
 import type { ParkingResult } from './model/parkingResult';
-import type { UnparkingResult } from './model/unParkingResult';
+import type { UnparkingResult } from './model/unparkingResult';
 import type { VehicleType } from './type/vehicleType';
 
 export interface IParkingLot {

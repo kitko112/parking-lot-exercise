@@ -1,6 +1,6 @@
 import type { IParkingLot } from './IParkingLot';
 import type { ParkingResult } from './model/parkingResult';
-import type { UnparkingResult } from './model/unParkingResult';
+import type { UnparkingResult } from './model/unparkingResult';
 import type { IFeeService } from './service/IFeeService';
 import type { IReceiptService } from './service/IReceiptService';
 import type { ISpotAllocationService } from './service/ISpotAllocationService';
