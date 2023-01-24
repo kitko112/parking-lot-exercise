@@ -20,7 +20,7 @@ export class TicketRepository implements ITicketRepository {
 
     public updateTicket(ticketNumber: string, exitDateTime: Date): ParkingTicket {
         const ticket = this._ticketMap.get(ticketNumber);
-        if(ticket){
+        if (ticket) {
             ticket.exitDateTime = exitDateTime;
             return { ...ticket };
         }
@@ -28,6 +28,7 @@ export class TicketRepository implements ITicketRepository {
     }
 
     public getTicketById(ticketNumber: string): ParkingTicket | undefined {
-        return this._ticketMap.get(ticketNumber);
+        const ticket = this._ticketMap.get(ticketNumber);
+        return ticket ? { ...ticket } : undefined;
     }
 }
