@@ -12,10 +12,10 @@ describe('Receipt Service test suite', () => {
             receiptNumber: 'R-001',
             entryDateTime: mockEntryDateTime,
             exitDateTime: mockExitDateTime,
-            fees: mockFees
+            fee: mockFees
         }
         const mockReceiptRepository: IReceiptRepository = {
-            createReceipt: jest.fn().mockReturnValue(expectedReceipt)
+            insertReceipt: jest.fn().mockReturnValue(expectedReceipt)
         };
 
         it('should return parking ticket successfully', () => {

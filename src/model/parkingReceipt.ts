@@ -1,6 +1,6 @@
 export interface ParkingReceipt {
-    receiptNumber: string;
+    receiptNumber?: string;
     entryDateTime: Date;
     exitDateTime: Date;
-    fees: number;
+    fee: number;
 }

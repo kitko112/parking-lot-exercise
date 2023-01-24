@@ -162,7 +162,7 @@ describe('Parking Lot test suite', () => {
                 receiptNumber: 'R-001',
                 entryDateTime: mockEntryDateTime,
                 exitDateTime: dateNow,
-                fees: expectedFee
+                fee: expectedFee
             }
 
             const mockReceiptService: IReceiptService = {
