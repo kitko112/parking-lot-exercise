@@ -64,7 +64,7 @@ describe('Parking Lot test suite', () => {
             expect(parkingResult).toEqual({ ticket: newParkingTicket, message: 'Parking successful' });
         });
 
-        it('should return result of "No space available" when there is no available spot for a motorcycle', () => {
+        it('should return "No space available" when there is no available spot for a motorcycle', () => {
             const mockSpotAllocationService: ISpotAllocationService = {
                 getAvailableSpot: jest.fn().mockReturnValue(undefined),
                 allocateSpot: jest.fn(),
@@ -120,4 +120,171 @@ describe('Parking Lot test suite', () => {
         })
     })
 
+    describe('Unpark method', () => {
+        const vehicleSpotMap = new Map<VehicleType, SpotSize>([
+            ['motorcycle', 'small']
+        ]);
+        const mockEntryDateTime = new Date('2023-01-23T22:07:17.169Z');
+    
+        it('should return receipt successfully', () => {
+            const dateNow = new Date();
+            jest.setSystemTime(dateNow);
+    
+            const mockTicket: ParkingTicket = {
+                ticketNumber: '001',
+                entryDateTime: mockEntryDateTime,
+                spotNumber: 1
+            }
+            const mockTicketService: ITicketService = {
+                createTicket: jest.fn(),
+                updateTicketExited: jest.fn(),
+                getTicket: jest.fn().mockReturnValue(mockTicket)
+            };
+    
+            const mockOccupiedSpot: ParkingSpot = {
+                spotNumber: 1,
+                spotSize: 'small',
+                isOccupied: true
+            }
+            const mockSpotAllocationService: ISpotAllocationService = {
+                getAvailableSpot: jest.fn(),
+                allocateSpot: jest.fn(),
+                deallocateSpot: jest.fn(),
+                getOccupiedSpot: jest.fn().mockReturnValue(mockOccupiedSpot)
+            };
+    
+            const expectedFee = 10;
+            const mockFeeService: IFeeService = {
+                calculate: jest.fn().mockReturnValue(expectedFee)
+            }
+
+            const expectedReceipt: ParkingReceipt = {
+                receiptNumber: 'R-001',
+                entryDateTime: mockEntryDateTime,
+                exitDateTime: dateNow,
+                fees: expectedFee
+            }
+
+            const mockReceiptService: IReceiptService = {
+                createReceipt: jest.fn().mockReturnValue(expectedReceipt)
+            }
+
+            const parkingLot = new ParkingLot(
+                mockSpotAllocationService,
+                mockTicketService,
+                mockReceiptService,
+                mockFeeService,
+                vehicleSpotMap
+            );
+    
+            const parkingResult = parkingLot.unpark('001');
+            expect(mockTicketService.getTicket).toHaveBeenCalledWith('001');
+            expect(mockSpotAllocationService.getOccupiedSpot).toHaveBeenCalledWith(mockTicket.spotNumber);
+            expect(mockSpotAllocationService.deallocateSpot).toHaveBeenCalledWith(mockOccupiedSpot);
+            expect(mockFeeService.calculate).toHaveBeenCalledWith(mockEntryDateTime, dateNow, mockOccupiedSpot.spotSize);
+            expect(mockReceiptService.createReceipt).toHaveBeenCalledWith(mockEntryDateTime, dateNow, expectedFee);
+            expect(mockTicketService.updateTicketExited).toHaveBeenCalledWith(mockTicket.ticketNumber, dateNow);
+            expect(parkingResult).toEqual({ receipt: expectedReceipt, message: 'Unparking successful' });
+        });
+
+        it('should return "Spot of the ticket is not occupied" if there is inconsistency between ticket and spot', () => {
+            const dateNow = new Date();
+            jest.setSystemTime(dateNow);
+    
+            const mockTicket: ParkingTicket = {
+                ticketNumber: '001',
+                entryDateTime: mockEntryDateTime,
+                spotNumber: 1
+            }
+            const mockTicketService: ITicketService = {
+                createTicket: jest.fn(),
+                updateTicketExited: jest.fn(),
+                getTicket: jest.fn().mockReturnValue(mockTicket)
+            };
+    
+            const mockSpotAllocationService: ISpotAllocationService = {
+                getAvailableSpot: jest.fn(),
+                allocateSpot: jest.fn(),
+                deallocateSpot: jest.fn(),
+                getOccupiedSpot: jest.fn().mockReturnValue(undefined)
+            };
+    
+            const mockFeeService: IFeeService = {
+                calculate: jest.fn()
+            }
+
+            const mockReceiptService: IReceiptService = {
+                createReceipt: jest.fn()
+            }
+
+            const parkingLot = new ParkingLot(
+                mockSpotAllocationService,
+                mockTicketService,
+                mockReceiptService,
+                mockFeeService,
+                vehicleSpotMap
+            );
+    
+            const parkingResult = parkingLot.unpark('001');
+            expect(mockTicketService.getTicket).toHaveBeenCalledWith('001');
+            expect(mockSpotAllocationService.getOccupiedSpot).toHaveBeenCalledWith(mockTicket.spotNumber);
+            
+            expect(mockSpotAllocationService.deallocateSpot).not.toHaveBeenCalled();
+            expect(mockFeeService.calculate).not.toHaveBeenCalled();
+            expect(mockReceiptService.createReceipt).not.toHaveBeenCalled();
+            expect(mockTicketService.updateTicketExited).not.toHaveBeenCalled();
+            expect(parkingResult).toEqual({ message: 'Spot of the ticket is not occupied' });
+        });
+
+        it('should return "Ticket not found" there ticket has exited', () => {
+            const dateNow = new Date();
+            jest.setSystemTime(dateNow);
+    
+            const mockTicket: ParkingTicket = {
+                ticketNumber: '001',
+                entryDateTime: mockEntryDateTime,
+                spotNumber: 1,
+                exitDateTime: dateNow,
+            }
+
+            const mockTicketService: ITicketService = {
+                createTicket: jest.fn(),
+                updateTicketExited: jest.fn(),
+                getTicket: jest.fn().mockReturnValue(mockTicket)
+            };
+    
+            const mockSpotAllocationService: ISpotAllocationService = {
+                getAvailableSpot: jest.fn(),
+                allocateSpot: jest.fn(),
+                deallocateSpot: jest.fn(),
+                getOccupiedSpot: jest.fn()
+            };
+    
+            const mockFeeService: IFeeService = {
+                calculate: jest.fn()
+            }
+
+            const mockReceiptService: IReceiptService = {
+                createReceipt: jest.fn()
+            }
+
+            const parkingLot = new ParkingLot(
+                mockSpotAllocationService,
+                mockTicketService,
+                mockReceiptService,
+                mockFeeService,
+                vehicleSpotMap
+            );
+    
+            const parkingResult = parkingLot.unpark('001');
+            expect(mockTicketService.getTicket).toHaveBeenCalledWith('001');
+
+            expect(mockSpotAllocationService.getOccupiedSpot).not.toHaveBeenCalled();
+            expect(mockSpotAllocationService.deallocateSpot).not.toHaveBeenCalled();
+            expect(mockFeeService.calculate).not.toHaveBeenCalled();
+            expect(mockReceiptService.createReceipt).not.toHaveBeenCalled();
+            expect(mockTicketService.updateTicketExited).not.toHaveBeenCalled();
+            expect(parkingResult).toEqual({ message: 'Ticket not found' });
+        });
+    })
 })
