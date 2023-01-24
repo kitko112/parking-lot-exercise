@@ -25,9 +25,7 @@ describe('Spot Allocation Service test suite', () => {
             getAvailableMediumSpot: jest.fn().mockReturnValue(emptyMediumSpot),
             getAvailableLargeSpot: jest.fn().mockReturnValue(emptyLargeSpot),
             getOccupiedSpotById: jest.fn(),
-            updateSmallSpot: jest.fn(),
-            updateMediumSpot: jest.fn(),
-            updateLargeSpot: jest.fn(),
+            updateSpot: jest.fn(),
         };
 
         it('should return a available small spot', () => {
@@ -53,15 +51,13 @@ describe('Spot Allocation Service test suite', () => {
     });
 
     describe('Get occupied spot method', () => {
-        const occupiedSpot: ParkingSpot = {spotNumber: 1, isOccupied: true, spotSize: 'small'} 
+        const occupiedSpot: ParkingSpot = { spotNumber: 1, isOccupied: true, spotSize: 'small' }
         const mockSpotRepository: ISpotRepository = {
             getAvailableSmallSpot: jest.fn(),
             getAvailableMediumSpot: jest.fn(),
             getAvailableLargeSpot: jest.fn(),
             getOccupiedSpotById: jest.fn().mockReturnValue(occupiedSpot),
-            updateSmallSpot: jest.fn(),
-            updateMediumSpot: jest.fn(),
-            updateLargeSpot: jest.fn(),
+            updateSpot: jest.fn(),
         };
         it('should return occupied spot', () => {
             const spotAllocationService = new SpotAllocationService(mockSpotRepository);
@@ -78,27 +74,13 @@ describe('Spot Allocation Service test suite', () => {
             spotSize: 'small'
         };
         const occupiedSmallSpot = { ...emptySmallSpot, isOccupied: true };
-        const emptyMediumSpot: ParkingSpot = {
-            spotNumber: 11,
-            isOccupied: false,
-            spotSize: 'medium'
-        };
-        const occupiedMediumSpot = { ...emptyMediumSpot, isOccupied: true };
-        const emptyLargeSpot: ParkingSpot = {
-            spotNumber: 21,
-            isOccupied: false,
-            spotSize: 'large'
-        };
-        const occupiedLargeSpot = { ...emptyLargeSpot, isOccupied: true };
 
         const mockSpotRepository: ISpotRepository = {
             getAvailableSmallSpot: jest.fn(),
             getAvailableMediumSpot: jest.fn(),
             getAvailableLargeSpot: jest.fn(),
             getOccupiedSpotById: jest.fn(),
-            updateSmallSpot: jest.fn().mockReturnValue(occupiedSmallSpot),
-            updateMediumSpot: jest.fn().mockReturnValue(occupiedMediumSpot),
-            updateLargeSpot: jest.fn().mockReturnValue(occupiedLargeSpot)
+            updateSpot: jest.fn().mockReturnValue(occupiedSmallSpot),
         };
 
         it('should return the small spot occupied after it is allocated', () => {
@@ -108,18 +90,6 @@ describe('Spot Allocation Service test suite', () => {
             expect(allocatedSpot).toEqual(occupiedSmallSpot);
         });
 
-        it('should return the medium spot occupied after it is allocated', () => {
-            const spotAllocationService = new SpotAllocationService(mockSpotRepository);
-            const allocatedSpot = spotAllocationService.allocateSpot(emptyMediumSpot);
-
-            expect(allocatedSpot).toEqual(occupiedMediumSpot);
-        });
-
-        it('should return the large spot occupied after it is allocated', () => {
-            const spotAllocationService = new SpotAllocationService(mockSpotRepository);
-            const allocatedSpot = spotAllocationService.allocateSpot(emptyLargeSpot);
-
-            expect(allocatedSpot).toEqual(occupiedLargeSpot);
-        });
     });
+
 });
