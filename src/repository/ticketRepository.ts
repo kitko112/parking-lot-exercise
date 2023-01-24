@@ -15,7 +15,7 @@ export class TicketRepository implements ITicketRepository {
             ticketNumber,
         }
         this._ticketMap.set(ticketNumber, insertedTicket);
-        return insertedTicket;
+        return { ...insertedTicket };
     }
 
     public updateTicket(ticketNumber: string, exitDateTime: Date): ParkingTicket {
