@@ -58,10 +58,10 @@ export class ParkingLot implements IParkingLot {
             if (spot) {
                 const exitDateTime = new Date();
 
-                const fees = this._feeService.calculate(ticket.entryDateTime, exitDateTime, spot.spotSize);
+                const fee = this._feeService.calculate(ticket.entryDateTime, exitDateTime, spot.spotSize);
                 this._ticketService.updateTicketExited(ticketNumber, exitDateTime);
                 this._spotAllocationService.deallocateSpot(spot);
-                const receipt = this._receiptService.createReceipt(ticket.entryDateTime, exitDateTime, fees);
+                const receipt = this._receiptService.createReceipt(ticket.entryDateTime, exitDateTime, fee);
                 
                 return { receipt, message: 'Unparking successful' };
             } else {
