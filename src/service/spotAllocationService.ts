@@ -11,7 +11,7 @@ export class SpotAllocationService implements ISpotAllocationService{
         this._spotRepository = spotRepository;
     }
 
-    public getSpot(spotSize: SpotSize): ParkingSpot | undefined {
+    public getAvailableSpot(spotSize: SpotSize): ParkingSpot | undefined {
         switch (spotSize){
             case 'small':{
                 return this._spotRepository.getAvailableSmallSpot();

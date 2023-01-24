@@ -31,21 +31,21 @@ describe('Spot Allocation Service test suite', () => {
 
         it('should return a available small spot', () => {
             const spotAllocationService = new SpotAllocationService(mockSpotRepository)
-            const smallSpot = spotAllocationService.getSpot('small');
+            const smallSpot = spotAllocationService.getAvailableSpot('small');
 
             expect(smallSpot).toEqual(emptySmallSpot);
         });
 
         it('should return a available medium spot', () => {
             const spotAllocationService = new SpotAllocationService(mockSpotRepository)
-            const mediumSpot = spotAllocationService.getSpot('medium');
+            const mediumSpot = spotAllocationService.getAvailableSpot('medium');
 
             expect(mediumSpot).toEqual(emptyMediumSpot);
         });
 
         it('should return a available large spot', () => {
             const spotAllocationService = new SpotAllocationService(mockSpotRepository)
-            const largeSpot = spotAllocationService.getSpot('large');
+            const largeSpot = spotAllocationService.getAvailableSpot('large');
 
             expect(largeSpot).toEqual(emptyLargeSpot);
         });
