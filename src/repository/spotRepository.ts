@@ -63,20 +63,8 @@ export class SpotRepository implements ISpotRepository {
         return spot?.isOccupied ? { ...spot } : undefined;
     }
 
-    public updateSmallSpot(parkingSpot: ParkingSpot): ParkingSpot {
-        return this.updateSpot(this._smallSpots, parkingSpot);
-    }
-
-    public updateMediumSpot(parkingSpot: ParkingSpot): ParkingSpot {
-        return this.updateSpot(this._mediumSpots, parkingSpot);
-    }
-
-    public updateLargeSpot(parkingSpot: ParkingSpot): ParkingSpot {
-        return this.updateSpot(this._largeSpots, parkingSpot);
-    }
-
-    private updateSpot(spots: ParkingSpot[], { spotNumber, spotSize, isOccupied }: ParkingSpot): ParkingSpot {
-        const spot = spots.find(s => s.spotNumber === spotNumber);
+    public updateSpot({ spotNumber, spotSize, isOccupied }: ParkingSpot): ParkingSpot {
+        const spot = this._spotMap.get(spotNumber);
         if (spot) {
             spot.isOccupied = isOccupied;
             return { ...spot };
