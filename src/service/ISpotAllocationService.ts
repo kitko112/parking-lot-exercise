@@ -5,4 +5,5 @@ export interface ISpotAllocationService {
     getAvailableSpot(spotSize: SpotSize): ParkingSpot | undefined;
     getOccupiedSpot(spotNumber: number): ParkingSpot | undefined;
     allocateSpot(parkingSpot: ParkingSpot): ParkingSpot;
+    deallocateSpot(parkingSpot: ParkingSpot): ParkingSpot;
 }

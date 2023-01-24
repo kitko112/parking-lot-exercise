@@ -33,4 +33,9 @@ export class SpotAllocationService implements ISpotAllocationService{
         const updateSpot = {...parkingSpot, isOccupied: true}
         return this._spotRepository.updateSpot(updateSpot);
     }
+
+    public deallocateSpot(parkingSpot: ParkingSpot): ParkingSpot {
+        const updateSpot = {...parkingSpot, isOccupied: false}
+        return this._spotRepository.updateSpot(updateSpot);
+    }
 }

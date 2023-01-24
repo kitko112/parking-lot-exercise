@@ -92,4 +92,29 @@ describe('Spot Allocation Service test suite', () => {
 
     });
 
+    describe('Deallocate spot method', () => {
+        const occupiedSmallSpot: ParkingSpot = {
+            spotNumber: 1,
+            isOccupied: true,
+            spotSize: 'small'
+        };
+        const emptySmallSpot = { ...occupiedSmallSpot, isOccupied: false };
+
+        const mockSpotRepository: ISpotRepository = {
+            getAvailableSmallSpot: jest.fn(),
+            getAvailableMediumSpot: jest.fn(),
+            getAvailableLargeSpot: jest.fn(),
+            getOccupiedSpotById: jest.fn(),
+            updateSpot: jest.fn().mockReturnValue(emptySmallSpot),
+        };
+
+        it('should return the small spot emptied after it is deallocated', () => {
+            const spotAllocationService = new SpotAllocationService(mockSpotRepository);
+            const deallocatedSpot = spotAllocationService.deallocateSpot(occupiedSmallSpot);
+
+            expect(deallocatedSpot).toEqual(emptySmallSpot);
+        });
+
+    });
+
 });
