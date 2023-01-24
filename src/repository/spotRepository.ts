@@ -20,6 +20,8 @@ export class SpotRepository implements ISpotRepository {
     private _mediumSpots: ParkingSpot[];
     private _largeSpots: ParkingSpot[];
 
+    private _spotMap: Map<number, ParkingSpot>;
+
     constructor(
         initSmallSpots: () => ParkingSpot[],
         initMediumSpots: () => ParkingSpot[],
@@ -28,6 +30,15 @@ export class SpotRepository implements ISpotRepository {
         this._smallSpots = initSmallSpots();
         this._mediumSpots = initMediumSpots();
         this._largeSpots = initLargeSpots();
+
+        this._spotMap = new Map(
+            [
+                ...this._smallSpots,
+                ...this._mediumSpots,
+                ...this._largeSpots
+            ]
+                .map(s => ([s.spotNumber, s]))
+        )
     }
 
     public getAvailableLargeSpot(): ParkingSpot | undefined {
@@ -42,9 +53,14 @@ export class SpotRepository implements ISpotRepository {
         return this.findEmptySpot(this._smallSpots);
     }
 
-    private findEmptySpot(spots: ParkingSpot[]): ParkingSpot | undefined{
+    private findEmptySpot(spots: ParkingSpot[]): ParkingSpot | undefined {
         const spot = spots.find(s => !s.isOccupied);
-        return spot? {...spot}: undefined;
+        return spot ? { ...spot } : undefined;
+    }
+
+    public getOccupiedSpotById(spotNumber: number): ParkingSpot | undefined {
+        const spot = this._spotMap.get(spotNumber);
+        return spot?.isOccupied? spot: undefined;
     }
 
     public updateSmallSpot(parkingSpot: ParkingSpot): ParkingSpot {
@@ -59,9 +75,9 @@ export class SpotRepository implements ISpotRepository {
         return this.updateSpot(this._largeSpots, parkingSpot);
     }
 
-    private updateSpot(spots: ParkingSpot[], {spotNumber, spotSize, isOccupied}: ParkingSpot): ParkingSpot{
-        const spot =  spots.find(s => s.spotNumber === spotNumber);
-        if(spot){
+    private updateSpot(spots: ParkingSpot[], { spotNumber, spotSize, isOccupied }: ParkingSpot): ParkingSpot {
+        const spot = spots.find(s => s.spotNumber === spotNumber);
+        if (spot) {
             spot.isOccupied = isOccupied;
             return spot;
         } else {
