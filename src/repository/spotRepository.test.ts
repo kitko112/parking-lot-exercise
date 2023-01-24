@@ -95,6 +95,15 @@ describe('Spot Repository test suite', () => {
 
             expect(occupiedSpot).toBeUndefined();
         })
+
+        it('should return undefined when the spot is not exist', () => {
+            const spotNumber = 100;
+
+            const repository = new SpotRepository(iniSmallSpots, initOccupiedMediumSpots, initLargeSpots);
+            const occupiedSpot = repository.getOccupiedSpotById(spotNumber);
+
+            expect(occupiedSpot).toBeUndefined();
+        })
     })
 
     describe('Update small spot method', () => {
