@@ -60,7 +60,7 @@ export class SpotRepository implements ISpotRepository {
 
     public getOccupiedSpotById(spotNumber: number): ParkingSpot | undefined {
         const spot = this._spotMap.get(spotNumber);
-        return spot?.isOccupied? spot: undefined;
+        return spot?.isOccupied ? { ...spot } : undefined;
     }
 
     public updateSmallSpot(parkingSpot: ParkingSpot): ParkingSpot {
@@ -79,7 +79,7 @@ export class SpotRepository implements ISpotRepository {
         const spot = spots.find(s => s.spotNumber === spotNumber);
         if (spot) {
             spot.isOccupied = isOccupied;
-            return spot;
+            return { ...spot };
         } else {
             throw new Error(`Unable to update non existent ${spotSize} spot: ${spotNumber}`);
         }
