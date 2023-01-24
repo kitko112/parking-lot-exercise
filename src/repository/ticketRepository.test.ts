@@ -25,7 +25,7 @@ describe('Ticket Repositry test suite', () => {
     });
 
     describe('Update ticket exist date time method', () => {
-        it('should return ticket with exist date time', () => {
+        it('should return ticket with exit date time', () => {
             const newTicketOne = { spotNumber: 1, entryDateTime: new Date() };
             const exitDateTime = new Date();
 
@@ -33,7 +33,7 @@ describe('Ticket Repositry test suite', () => {
             const ticket = repository.insertTicket(newTicketOne);
             const updatedTicket = repository.updateTicket(ticket.ticketNumber!, exitDateTime);
 
-            expect(updatedTicket).toEqual({ ...ticket, ticketNumber: '001' });
+            expect(updatedTicket).toEqual({ ...ticket, exitDateTime });
         });
 
         it('should throw error if ticket to be updated is not exist', () => {
