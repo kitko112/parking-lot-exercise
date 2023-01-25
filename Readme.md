@@ -11,11 +11,17 @@ yarn test
 ## Run Scenarios
 
 ### Example 1: Small motorcycle/scooter parking lot
+Scenario is written in `scenarios/mallSmallParkingLot.test.ts`
+
+Run below commmand to see the result
 ```
 yarn test:mallSmallParkingLot
 ```
 
 ### Example 2: Mall parking lot
+Scenario is written in `scenarios/mallParkingLot.test.ts`
+
+Run below commmand to see the result
 ```
 yarn test:mallParkingLot
 ```
