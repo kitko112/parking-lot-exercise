@@ -1,13 +1,26 @@
-Parking Lot Exercise
+# Parking Lot Exercise
 
-# Run Scenarios
+## Prerequisite
+Install Node JS 18 LTS & yarn. Run `yarn install` for the first time before running any commands.
 
-## Example 1: Small motorcycle/scooter parking lot
+## Unit test with coverage
+```
+yarn test
+```
+
+## Run Scenarios
+
+### Example 1: Small motorcycle/scooter parking lot
 ```
 yarn test:mallSmallParkingLot
 ```
 
-# Assumptions
+### Example 2: Mall parking lot
+```
+yarn test:mallParkingLot
+```
+
+## Assumptions
 1. Concurrency handling is handled in database layer (Optimistic Locking or Pessimistic Locking)
 2. Small vehicle can only take small spot, medium and large vehicle can only take spot in their size as well, it is feasible to make the change on spotAllocationService though
 3. Database Transaction is not in scope
