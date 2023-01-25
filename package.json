@@ -18,6 +18,7 @@
     "test": "jest --coverage ./src/**/*",
     "test:mallSmallParkingLot": "jest --runInBand scenarios/mallSmallParkingLot.test.ts",
     "test:mallParkingLot": "jest --runInBand scenarios/mallParkingLot.test.ts",
-    "test:stadiumParkingLot": "jest --runInBand scenarios/stadiumParkingLot.test.ts"
+    "test:stadiumParkingLot": "jest --runInBand scenarios/stadiumParkingLot.test.ts",
+    "test:airportParkingLot": "jest --runInBand scenarios/airportParkingLot.test.ts"
   }
 }
