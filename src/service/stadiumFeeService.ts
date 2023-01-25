@@ -1,11 +1,11 @@
-import { diffDateTimeInHours } from '../common';
+import { diffDateTimeToHours } from '../common';
 import type { SpotSize } from '../type/spotSize';
 import type { IFeeService } from './IFeeService';
 
 export class StadiumFeeService implements IFeeService {
 
     public calculate(entryDateTime: Date, exitDateTime: Date, spotSize: SpotSize): number {
-        const diffHours = diffDateTimeInHours(entryDateTime, exitDateTime);
+        const diffHours = diffDateTimeToHours(entryDateTime, exitDateTime);
         return spotSize === 'small' ?
             this.calculateSmallSpotFee(diffHours) :
             this.calculateMediumSpotFee(diffHours);
