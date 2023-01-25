@@ -32,7 +32,7 @@ describe('Example 3: Stadium Parking Lot', () => {
             expect(ticket).toEqual({ ticketNumber: '002', spotNumber: 1, entryDateTime: dateNow });
         })
 
-        it('Sr No 4 - Action: Unpark car, ticket num 002. Result: Receipt Num: "R-002", Entry Date Time = 2023-01-25T04:00:00, Exit Date Time = 2023-01-25T18:59:00, Fee = 390', () => {
+        it('Sr No 4 - Action: Unpark motorcycle, ticket num 002. Result: Receipt Num: "R-002", Entry Date Time = 2023-01-25T04:00:00, Exit Date Time = 2023-01-25T18:59:00, Fee = 390', () => {
             const dateNow = new Date('2023-01-25T18:59:00.000Z')
             jest.setSystemTime(dateNow);
             const { receipt } = stadiumParkingLot.unpark('002');
