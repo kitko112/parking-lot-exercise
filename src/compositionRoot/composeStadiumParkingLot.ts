@@ -25,7 +25,7 @@ export default () => {
 
     const stadiumFeeService = new StadiumFeeService();
 
-    const mallParkingLotVehicleSpotSizeMap = new Map<VehicleType, SpotSize>([
+    const stadiumParkingLotVehicleSpotSizeMap = new Map<VehicleType, SpotSize>([
         ['motorcycle', 'small'],
         ['scooter', 'small'],
         ['car', 'medium'],
@@ -37,7 +37,7 @@ export default () => {
         ticketSetvice,
         receiptService,
         stadiumFeeService,
-        mallParkingLotVehicleSpotSizeMap
+        stadiumParkingLotVehicleSpotSizeMap
     );
 
     return stadiumParkingLot;
