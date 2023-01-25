@@ -9,7 +9,7 @@ export class MallFeeService implements IFeeService{
         this._spotSizeHourlyMap = new Map<SpotSize, number>([
             ['small', 10],
             ['medium', 20],
-            ['large', 30]
+            ['large', 50]
         ])
     }
 
