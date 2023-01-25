@@ -16,7 +16,7 @@ export class MallFeeService implements IFeeService{
 
     public calculate(entryDateTime: Date, exitDateTime: Date, spotSize: SpotSize): number {
         const hourlyFee = this._spotSizeHourlyMap.get(spotSize)!;
-        const diffHrs = diffDateTimeInHours(entryDateTime, exitDateTime);
+        const diffHrs = Math.ceil(diffDateTimeInHours(entryDateTime, exitDateTime));
         return diffHrs * hourlyFee;
     }
 }
