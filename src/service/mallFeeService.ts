@@ -1,3 +1,4 @@
+import { diffDateTimeInHours } from '../common';
 import type { SpotSize } from '../type/spotSize';
 import type { IFeeService } from './IFeeService';
 
@@ -15,8 +16,7 @@ export class MallFeeService implements IFeeService{
 
     public calculate(entryDateTime: Date, exitDateTime: Date, spotSize: SpotSize): number {
         const hourlyFee = this._spotSizeHourlyMap.get(spotSize)!;
-        const diffMs = exitDateTime.getTime() - entryDateTime.getTime();
-        const diffHrs = Math.ceil((diffMs % 86400000) / 3600000);
+        const diffHrs = diffDateTimeInHours(entryDateTime, exitDateTime);
         return diffHrs * hourlyFee;
     }
 }
