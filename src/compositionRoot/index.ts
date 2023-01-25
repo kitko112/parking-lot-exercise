@@ -1,5 +1,7 @@
 import composeMallSmallParkingLot from './composeMallSmallParkingLot';
+import composeMallParkingLot from './composeMallParkingLot'
 
 export default () => ({
-    mallSmallParkingLot: composeMallSmallParkingLot()
+    mallSmallParkingLot: composeMallSmallParkingLot(),
+    mallParkingLot: composeMallParkingLot()
 })

@@ -16,6 +16,7 @@
     "build": "rm -rf dist && tsc",
     "start": "yarn build && node dist/index.js",
     "test": "jest --coverage ./src/**/*",
-    "test:mallSmallParkingLot": "jest --runInBand scenarios/mallSmallParkingLot.test.ts"
+    "test:mallSmallParkingLot": "jest --runInBand scenarios/mallSmallParkingLot.test.ts",
+    "test:mallParkingLot": "jest --runInBand scenarios/mallParkingLot.test.ts"
   }
 }
